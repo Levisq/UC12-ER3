@@ -19,7 +19,7 @@ namespace Chapter.Web.API.Contexts
             if (!optionsBuilder.IsConfigured)
             {
                 // cada provedor tem sua sintaxe para especificação
-                optionsBuilder.UseSqlServer("Data Source = DESKTOP-NT701DL\\SQLEXPRESS; trusted_connection=true;");
+                optionsBuilder.UseSqlServer("Data Source = LEVISQ\\SQLEXPRESS; trusted_connection=true;");
             }
         }
         // dbset representa as entidades que serão utilizadas nas operações de leitura, criação, atualização e deleção
