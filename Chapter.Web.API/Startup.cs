@@ -1,4 +1,5 @@
 using Chapter.Web.API.Contexts;
+using Chapter.Web.API.Interfaces;
 using Chapter.Web.API.Repositories;
 using Chapter.WebApi.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -70,7 +71,7 @@ namespace Chapter.Web.API
 
             services.AddTransient<LivroRepository, LivroRepository>();
 
-            services.AddTransient<UsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

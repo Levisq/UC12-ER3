@@ -72,3 +72,5 @@ C:\Users\Levisq\Documents\Curso Senai\UC11\Chapter.Web.API\Chapter.Web.API\bin\D
 C:\Users\Levisq\Documents\Curso Senai\UC11\Chapter.Web.API\Chapter.Web.API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Levisq\Documents\Curso Senai\UC11\Chapter.Web.API\Chapter.Web.API\obj\Debug\net5.0\Chapter.Web.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Levisq\Documents\Curso Senai\UC11\Chapter.Web.API\Chapter.Web.API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Levisq\Documents\Curso Senai\UC11\Chapter.Web.API\Chapter.Web.API\bin\Debug\net5.0\Castle.Core.dll
+C:\Users\Levisq\Documents\Curso Senai\UC11\Chapter.Web.API\Chapter.Web.API\bin\Debug\net5.0\Moq.dll

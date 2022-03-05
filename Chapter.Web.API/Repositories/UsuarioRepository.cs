@@ -1,11 +1,12 @@
 ﻿using Chapter.Web.API.Contexts;
+using Chapter.Web.API.Interfaces;
 using Chapter.Web.API.Models;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Chapter.Web.API.Repositories
 {
-    public class UsuarioRepository
+    public class UsuarioRepository : IUsuarioRepository
     {
         private readonly ChapterContext _context;
 
