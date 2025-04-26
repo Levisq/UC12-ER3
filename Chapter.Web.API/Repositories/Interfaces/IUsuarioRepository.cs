@@ -8,6 +8,6 @@ public interface IUsuarioRepository
     IEnumerable<Usuario> Listar();
     Usuario BuscarPorId(int id);
     void Cadastrar(Usuario usuario);
-    void Atualizar(int id, Usuario usuario);
+    void Atualizar(Usuario usuario, int id);
     void Deletar(int id);
 }

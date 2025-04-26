@@ -1,64 +1,47 @@
-﻿using Chapter.Web.API.Contexts;
-using Chapter.Web.API.Interfaces;
-using Chapter.Web.API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Chapter.Web.API.Contexts;
+using Chapter.Web.API.Entities.Usuarios;
+using Chapter.Web.API.Interfaces;
 
-namespace Chapter.Web.API.Repositories
+namespace Chapter.Web.API.Repositories;
+
+public class UsuarioRepository : IUsuarioRepository
 {
-    public class UsuarioRepository : IUsuarioRepository
+    
+    private readonly ChapterContext _context;
+
+    public UsuarioRepository(ChapterContext context)
     {
-        private readonly ChapterContext _context;
-
-        public UsuarioRepository(ChapterContext context)
-        {
-            _context = context;
-        }
-
-        public List<Usuarios> Listar()
-        {
-            return _context.Usuarios.ToList();
-        }
-
-        public void Cadastrar(Usuarios u)
-        {
-            _context.Usuarios.Add(u);
-            _context.SaveChanges();
-        }
-        
-        public Usuarios BuscarPorId(int id)
-        {
-            return _context.Usuarios.Find(id);
-        }
-
-        public void Atualizar(int id, Usuarios U)
-        {
-            Usuarios UsuarioBuscado = _context.Usuarios.Find(id);
-            if (UsuarioBuscado != null)
-            {
-                UsuarioBuscado.Email = U.Email;
-                UsuarioBuscado.Senha = U.Senha;
-                UsuarioBuscado.Tipo = U.Tipo;
-            }
-
-            _context.Usuarios.Update(UsuarioBuscado);
-
-            _context.SaveChanges();
-        }
-        public void Deletar(int id)
-        {
-            Usuarios UsuarioBuscado = _context.Usuarios.Find(id);
-
-            _context.Usuarios.Remove(UsuarioBuscado);
-
-            _context.SaveChanges();
-        }
-
-
-        public Usuarios Login(string email, string senha)
-        {
-            return _context.Usuarios.FirstOrDefault(u => u.Email == email && u.Senha == senha);
-        }
-
+        _context = context;
     }
+
+    public IEnumerable<Usuario> Listar() => _context.Usuarios.ToList();
+
+    public Usuario BuscarPorId(int id) => _context.Usuarios.Find(id);
+
+    public void Atualizar(Usuario usuario, int id)
+    {
+        Usuario UsuarioExistente = _context.Usuarios.Find(id);
+        UsuarioExistente.Nome = usuario.Nome;
+        UsuarioExistente.Email = usuario.Email;
+        UsuarioExistente.Endereco = usuario.Endereco;
+
+        _context.SaveChanges();
+    }
+
+    public void Cadastrar(Usuario usuario)
+    {
+        _context.Usuarios.Add(usuario);
+        _context.SaveChanges();
+    }
+
+    public void Deletar(int id)
+    {
+        _context.Remove(_context.Usuarios.Find(id));
+        _context.SaveChanges();
+    }
+
 }

@@ -1,64 +1,44 @@
-﻿
+
 using Chapter.Web.API.Contexts;
-using Chapter.Web.API.Models;
+using Chapter.Web.API.Entities.Livros;
+using Chapter.Web.API.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-namespace Chapter.WebApi.Repositories
+namespace Chapter.Web.Api.Repositories;
+
+public class LivroRepository : ILivroRepository
 {
-    public class LivroRepository
+    private readonly ChapterContext _context;
+
+    public LivroRepository(ChapterContext context)
     {
-        // possui acesso aos dados
-        private readonly ChapterContext _context;
-        // somente um data context na memória da aplicação na requisição, evitar o usar o new
-        // para o repositório existir, precisa do contexto, a aplicacao cria
-        // configurar no startup
-        public LivroRepository(ChapterContext context)
-        {
-            _context = context;
-        }
-        // retorna a lista de livros
-        public List<Livro> Listar()
-        {
-            // SELECT Id, Titulo, QuantidadePaginas, Disponivel FROM Livros;
-
-            return _context.Livros.ToList();
-        }
-
-
-        public Livro BuscarPorId(int id)
-        {
-            return _context.Livros.Find(id);
-        }
-
-        public void Cadastrar(Livro livro) 
-        {
-            _context.Livros.Add(livro);
-
-            _context.SaveChanges();
-        }
-
-        public void Atualizar(int id, Livro Livro)
-        {
-            Livro LivroBuscado = _context.Livros.Find(id);
-            if (LivroBuscado != null)
-            {
-                LivroBuscado.Titulo = Livro.Titulo;
-                LivroBuscado.QuantidadePaginas = Livro.QuantidadePaginas;
-                LivroBuscado.Disponivel = Livro.Disponivel;
-            }
-
-            _context.Livros.Update(LivroBuscado);
-
-            _context.SaveChanges();
-        }
-
-        public void Deletar(int id)
-        {
-            Livro LivroBuscado = _context.Livros.Find(id);
-
-            _context.Livros.Remove(LivroBuscado);
-
-            _context.SaveChanges();
-        }
+        _context = context;
     }
+
+    public IEnumerable<Livro> Listar() => _context.Livros.ToList();
+
+    public Livro BuscarPorId(int id) => _context.Livros.Find(id);
+ 
+    public void Cadastrar(Livro l)
+    {
+        _context.Livros.Add(l);
+        _context.SaveChanges();
+    }
+
+    public void Atualizar(int id, Livro l)
+    {
+        Livro livroExistente = _context.Livros.Find(id);
+        livroExistente.Titulo = l.Titulo;
+        livroExistente.QuantidadePaginas = l.QuantidadePaginas;
+        livroExistente.Estoque = l.Estoque;
+
+        _context.SaveChanges();
+    }
+
+    public void Deletar(int id)
+    {
+        _context.Livros.Remove(_context.Livros.Find(id));
+        _context.SaveChanges();
+    }
+
 }
